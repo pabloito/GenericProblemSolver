@@ -22,4 +22,6 @@ public interface State {
 	 */
 	String getRepresentation();
 
+	boolean isGoal();
+
 }
