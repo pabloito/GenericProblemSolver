@@ -21,7 +21,5 @@ public interface State {
 	 * @return The STRING representation of the state.
 	 */
 	String getRepresentation();
-
-	boolean isGoal();
-
+	
 }

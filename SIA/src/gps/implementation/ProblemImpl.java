@@ -14,7 +14,7 @@ public class ProblemImpl implements Problem {
 
     @Override
     public boolean isGoal(State state) {
-        return state.isGoal();
+        return ((StateImpl)state).isGoal();
     }
 
     @Override
