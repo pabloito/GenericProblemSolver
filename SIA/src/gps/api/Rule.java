@@ -2,8 +2,6 @@ package gps.api;
 
 import java.util.Optional;
 
-import gps.exception.NotAppliableException;
-
 /**
  * Rule interface.
  */
