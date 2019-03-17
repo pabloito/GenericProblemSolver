@@ -27,6 +27,10 @@ public class GPSEngine {
 	// Use this variable in open set order.
 	protected SearchStrategy strategy;
 
+	public static void main(String args[]){
+		System.out.println("main");
+	}
+
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
 		// TODO: open = *Su queue favorito, TENIENDO EN CUENTA EL ORDEN DE LOS NODOS*
 		bestCosts = new HashMap<>();
