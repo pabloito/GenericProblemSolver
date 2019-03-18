@@ -7,7 +7,9 @@ import java.util.List;
 public class StateImpl implements State {
 
     private Tile[][] board;
+
     private List<Square> squares;
+
     public StateImpl(int width, int height, List<Square> squares) {
         board = new Tile[width][height];
         this.squares = squares;
@@ -30,4 +32,7 @@ public class StateImpl implements State {
         return true;
     }
 
+    public List<Square> getSquares() {
+        return squares;
+    }
 }
