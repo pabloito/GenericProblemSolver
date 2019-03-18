@@ -1,17 +1,14 @@
 package gps;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 import gps.api.Heuristic;
 import gps.api.Problem;
 import gps.api.Rule;
 import gps.api.State;
+import gps.implementation.*;
+
+import static gps.implementation.Direction.*;
 
 public class GPSEngine {
 
@@ -28,7 +25,21 @@ public class GPSEngine {
 	protected SearchStrategy strategy;
 
 	public static void main(String args[]){
-		System.out.println("main");
+		Heuristic heuristic1 = new HeuristicOneImpl();
+		Direction up = UP;
+		Direction down = DOWN;
+		Direction left = LEFT;
+		Direction right = RIGHT;
+
+		List<Square> squares = new ArrayList<>();
+
+		squares.add(new Square(1,0,"red",down,new Tile(1,3)));
+		squares.add(new Square(2,1,"green",down,new Tile(0,2)));
+		squares.add(new Square(3,2,"blue",left,new Tile(0,3)));
+
+		State s = new StateImpl(4,4,squares);
+
+		System.out.println("El valor de h(s) es " + heuristic1.getValue(s));
 	}
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
