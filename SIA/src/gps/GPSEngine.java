@@ -100,7 +100,7 @@ public class GPSEngine {
 			}
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
-			// TODO: ¿Cómo se agregan los nodos a open en BFS?
+			open.addAll(newCandidates);
 			break;
 		case DFS:
 			if (bestCosts.containsKey(node.getState())) {
@@ -108,7 +108,7 @@ public class GPSEngine {
 			}
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
-			// TODO: ¿Cómo se agregan los nodos a open en DFS?
+			open.addAll(newCandidates);
 			break;
 		case IDDFS:
 			if (bestCosts.containsKey(node.getState())) {
@@ -121,7 +121,7 @@ public class GPSEngine {
 		case GREEDY:
 			newCandidates = new PriorityQueue<>(/* TODO: Comparator! */);
 			addCandidates(node, newCandidates);
-			// TODO: ¿Cómo se agregan los nodos a open en GREEDY?
+			open.addAll(newCandidates);
 			break;
 		case ASTAR:
 			if (!isBest(node.getState(), node.getCost())) {
@@ -129,7 +129,7 @@ public class GPSEngine {
 			}
 			newCandidates = new ArrayList<>();
 			addCandidates(node, newCandidates);
-			// TODO: ¿Cómo se agregan los nodos a open en A*?
+			open.addAll(newCandidates);
 			break;
 		}
 	}
