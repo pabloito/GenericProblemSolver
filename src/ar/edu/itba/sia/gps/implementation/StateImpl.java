@@ -1,6 +1,6 @@
-package gps.implementation;
+package ar.edu.itba.sia.gps.implementation;
 
-import gps.api.State;
+import ar.edu.itba.sia.gps.api.State;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

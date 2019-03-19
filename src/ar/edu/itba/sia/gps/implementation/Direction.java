@@ -1,4 +1,4 @@
-package gps.implementation;
+package ar.edu.itba.sia.gps.implementation;
 
 public enum Direction {
     UP(0,-1, "UP"), DOWN(0,1, "DOWN"), LEFT(-1,0, "LEFT"), RIGHT(1,0, "RIGHT");

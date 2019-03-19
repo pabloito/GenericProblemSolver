@@ -1,8 +1,8 @@
-package gps.implementation;
+package ar.edu.itba.sia.gps.implementation;
 
-import gps.api.Problem;
-import gps.api.Rule;
-import gps.api.State;
+import ar.edu.itba.sia.gps.api.Problem;
+import ar.edu.itba.sia.gps.api.Rule;
+import ar.edu.itba.sia.gps.api.State;
 
 import java.util.List;
 

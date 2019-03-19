@@ -1,9 +1,9 @@
-package gps.implementation;
+package ar.edu.itba.sia.gps.implementation;
 
-import gps.api.Heuristic;
-import gps.api.State;
+import ar.edu.itba.sia.gps.api.Heuristic;
+import ar.edu.itba.sia.gps.api.State;
 
-public class HeuristicOneImpl implements Heuristic {
+public class HeuristicImpl implements Heuristic {
 
     @Override
     public Integer getValue(State state) {

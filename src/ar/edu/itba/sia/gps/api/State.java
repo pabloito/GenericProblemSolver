@@ -1,4 +1,4 @@
-package gps.api;
+package ar.edu.itba.sia.gps.api;
 
 /**
  * State interface.
@@ -21,5 +21,5 @@ public interface State {
 	 * @return The STRING representation of the state.
 	 */
 	String getRepresentation();
-	
+
 }

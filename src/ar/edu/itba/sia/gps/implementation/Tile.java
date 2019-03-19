@@ -1,4 +1,4 @@
-package gps.implementation;
+package ar.edu.itba.sia.gps.implementation;
 
 public class Tile {
     private int x;

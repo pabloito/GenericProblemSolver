@@ -1,4 +1,4 @@
-package gps.api;
+package ar.edu.itba.sia.gps.api;
 
 import java.util.List;
 

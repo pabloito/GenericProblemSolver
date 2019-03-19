@@ -1,17 +1,17 @@
-package gps;
+package ar.edu.itba.sia.gps;
 
 import java.util.*;
 
-import gps.api.Heuristic;
-import gps.api.Problem;
-import gps.api.Rule;
-import gps.api.State;
-import gps.implementation.*;
+import ar.edu.itba.sia.gps.api.Heuristic;
+import ar.edu.itba.sia.gps.api.Problem;
+import ar.edu.itba.sia.gps.api.Rule;
+import ar.edu.itba.sia.gps.api.State;
+import ar.edu.itba.sia.gps.implementation.*;
 
 import javax.naming.OperationNotSupportedException;
 
-import static gps.SearchStrategy.IDDFS;
-import static gps.implementation.Direction.*;
+import static ar.edu.itba.sia.gps.SearchStrategy.IDDFS;
+import static ar.edu.itba.sia.gps.implementation.Direction.*;
 
 public class GPSEngine {
 
@@ -28,7 +28,7 @@ public class GPSEngine {
 	private  SearchStrategy strategy;
 
 	public static void main(String args[]){
-		Heuristic heuristic1 = new HeuristicOneImpl();
+		Heuristic heuristic1 = new HeuristicImpl();
 		Direction up = UP;
 		Direction down = DOWN;
 		Direction left = LEFT;
@@ -135,20 +135,20 @@ public class GPSEngine {
 
 	private void explode(GPSNode node) {
 		switch (strategy) {
-		case BFS:
-		case DFS:
-		case IDDFS:
-			if (bestCosts.containsKey(node.getState())) {
-				return;
-			}
-			break;
-		case GREEDY:
-			break;
-		case ASTAR:
-			if (!isBest(node.getState(), node.getCost())) {
-				return;
-			}
-			break;
+			case BFS:
+			case DFS:
+			case IDDFS:
+				if (bestCosts.containsKey(node.getState())) {
+					return;
+				}
+				break;
+			case GREEDY:
+				break;
+			case ASTAR:
+				if (!isBest(node.getState(), node.getCost())) {
+					return;
+				}
+				break;
 		}
 		open.addAll(addCandidates(node));
 	}
