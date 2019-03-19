@@ -37,7 +37,7 @@ public class GPSEngine {
 		squares.add(new Square(2,1,"green",down,new Tile(0,2)));
 		squares.add(new Square(3,2,"blue",left,new Tile(0,3)));
 
-		State s = new StateImpl(4,4,squares);
+		State s = new StateImpl(4,4,squares, null);
 
 		System.out.println("El valor de h(s) es " + heuristic1.getValue(s));
 	}

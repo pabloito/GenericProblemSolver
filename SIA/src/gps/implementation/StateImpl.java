@@ -29,8 +29,10 @@ public class StateImpl implements State {
         for(Square s: squares){
             board[s.getX()][s.getY()] = s;
         }
-        for(Changer c: changers){
-            board[c.getX()][c.getY()] = c;
+        if(changers!=null){
+            for(Changer c: changers){
+                board[c.getX()][c.getY()] = c;
+            }
         }
         for(int i = 0; i < height; i++){
             for (int j = 0; j < width; j++){
