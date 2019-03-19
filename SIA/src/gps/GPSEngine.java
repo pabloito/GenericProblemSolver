@@ -133,7 +133,7 @@ public class GPSEngine {
 			if(pack.node!=null){
 				return new IDDFSPackage(pack.node,true);
 			}
-			remaining=pack.remaindingNodes;
+			remaining|=pack.remaindingNodes;
 		}
 		return new IDDFSPackage(null,remaining);
 
