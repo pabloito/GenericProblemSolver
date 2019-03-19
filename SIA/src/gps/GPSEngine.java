@@ -57,7 +57,7 @@ public class GPSEngine {
 				open = new PriorityQueue<>((GPSNode n1, GPSNode n2)-> (n2.getCost()+heuristic.getValue(n2.getState())) - (n1.getCost()+heuristic.getValue(n1.getState())));
 				break;
 			case IDDFS:
-				//TODO: this
+				//no se usa queue
 				break;
 			case GREEDY:
 				open = new PriorityQueue<>((GPSNode n1, GPSNode n2)->heuristic.getValue(n1.getState()) - heuristic.getValue(n2.getState()));
