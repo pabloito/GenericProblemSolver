@@ -8,6 +8,8 @@ import gps.api.Rule;
 import gps.api.State;
 import gps.implementation.*;
 
+import javax.naming.OperationNotSupportedException;
+
 import static gps.implementation.Direction.*;
 
 public class GPSEngine {
@@ -43,7 +45,25 @@ public class GPSEngine {
 	}
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
-		// TODO: open = *Su queue favorito, TENIENDO EN CUENTA EL ORDEN DE LOS NODOS*
+
+		switch(strategy){
+			case BFS:
+				open = new LinkedList<>();
+				break;
+			case DFS:
+				open = new PriorityQueue<>((GPSNode n1, GPSNode n2)-> n2.getCost() - n1.getCost());
+				break;
+			case ASTAR:
+				open = new PriorityQueue<>((GPSNode n1, GPSNode n2)-> (n2.getCost()+heuristic.getValue(n2.getState())) - (n1.getCost()+heuristic.getValue(n1.getState())));
+				break;
+			case IDDFS:
+				//TODO: this
+				break;
+			case GREEDY:
+				open = new PriorityQueue<>((GPSNode n1, GPSNode n2)->heuristic.getValue(n1.getState()) - heuristic.getValue(n2.getState()));
+				break;
+		}
+
 		bestCosts = new HashMap<>();
 		this.problem = problem;
 		this.strategy = strategy;
