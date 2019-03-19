@@ -15,6 +15,10 @@ public class StateImpl implements State {
     private List<Changer> changers;
     private int width, height;
 
+    @Override
+    public int hashCode() {
+        return squares.hashCode();
+    }
 
     public StateImpl(int width, int height, List<Square> squares, List<Changer> changers) {
         board = new Tile[width][height];

@@ -12,6 +12,14 @@ public class Square extends Tile {
         this.objective = objective;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = hash * 31 + getX();
+        hash = hash * 31 + getY();
+        return hash;
+    }
+
     public String getColor() {
         return color;
     }
