@@ -10,6 +10,7 @@ import java.util.Optional;
 public class StateImpl implements State {
 
     private Tile[][] board;
+
     private List<Square> squares;
     private List<Changer> changers;
     private int width, height;
