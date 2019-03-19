@@ -52,16 +52,16 @@ public class GPSEngine {
 				open = new LinkedList<>();
 				break;
 			case DFS:
-				open = new PriorityQueue<>((GPSNode n1, GPSNode n2)-> n2.getCost() - n1.getCost());
+				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getCost));
 				break;
 			case ASTAR:
-				open = new PriorityQueue<>((GPSNode n1, GPSNode n2)-> (n2.getCost()+heuristic.getValue(n2.getState())) - (n1.getCost()+heuristic.getValue(n1.getState())));
+				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n)-> (n.getCost()+heuristic.getValue(n.getState()))));
 				break;
 			case IDDFS:
 				//no se usa queue
 				break;
 			case GREEDY:
-				open = new PriorityQueue<>((GPSNode n1, GPSNode n2)->heuristic.getValue(n1.getState()) - heuristic.getValue(n2.getState()));
+				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n) -> heuristic.getValue(n.getState())));
 				break;
 		}
 
