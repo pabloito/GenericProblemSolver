@@ -52,13 +52,13 @@ public class GPSEngine {
 				open = new LinkedList<>();
 				break;
 			case DFS:
-				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getCost));
+				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth));
 				break;
 			case ASTAR:
 				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n)-> (n.getCost()+heuristic.getValue(n.getState()))));
 				break;
 			case IDDFS:
-				//no se usa queue
+				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth));
 				break;
 			case GREEDY:
 				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n) -> heuristic.getValue(n.getState())));
@@ -75,7 +75,7 @@ public class GPSEngine {
 	}
 
 	public void findSolution() {
-		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null);
+		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null,0);
 		open.add(rootNode);
 		if(strategy==IDDFS)
 		{
@@ -107,104 +107,65 @@ public class GPSEngine {
 				solutionNode=pack.node;
 				return;
 			}
-			if(!pack.remaindingNodes) {
-				finished=true;
-				failed=true;
-				return;
-			}
 			depth++;
-
 		}
+		finished=true;
+		failed=true;
 	}
 
-	private IDDFSPackage depthLimitedDFS(GPSNode node, int depth) {
-		if(depth==0){
-			if(problem.isGoal(node.getState())) {
-				return new IDDFSPackage(node, true); //El booleano no importa
+	private IDDFSPackage depthLimitedDFS(GPSNode initNode, int depth) {
+
+		GPSNode curr = initNode;
+		boolean remaining=false;
+
+		while(curr!=null) {
+			if (curr.getDepth() == depth) {
+				if (problem.isGoal(curr.getState())) {
+					return new IDDFSPackage(curr, true); //El booleano no importa
+				}
+				remaining=true;
 			}
-			return new IDDFSPackage(null, true);
-		}
-		boolean remaining = false;
-		Collection<GPSNode> collection = new LinkedList<>();
-		addCandidates(node,collection);
-
-		for (GPSNode childNode: collection ) {
-			IDDFSPackage pack = depthLimitedDFS(childNode, depth-1);
-			if(pack.node!=null){
-				return new IDDFSPackage(pack.node,true);
+			else{
+				explode(curr);
+				curr=open.remove();
 			}
-			remaining|=pack.remaindingNodes;
 		}
-		return new IDDFSPackage(null,remaining);
-
-	}
-
-	private class IDDFSPackage
-	{
-		private boolean remaindingNodes;
-		private GPSNode node;
-
-		public IDDFSPackage(GPSNode node, boolean remaindingNodes)
-		{
-			this.node=node;
-			this.remaindingNodes=remaindingNodes;
-		}
+		return new IDDFSPackage(null, remaining);
 	}
 
 	private void explode(GPSNode node) {
-		Collection<GPSNode> newCandidates;
 		switch (strategy) {
 		case BFS:
-			if (bestCosts.containsKey(node.getState())) {
-				return;
-			}
-			newCandidates = new ArrayList<>();
-			addCandidates(node, newCandidates);
-			open.addAll(newCandidates);
-			break;
 		case DFS:
-			if (bestCosts.containsKey(node.getState())) {
-				return;
-			}
-			newCandidates = new ArrayList<>();
-			addCandidates(node, newCandidates);
-			open.addAll(newCandidates);
-			break;
 		case IDDFS:
 			if (bestCosts.containsKey(node.getState())) {
 				return;
 			}
-			newCandidates = new ArrayList<>();
-			addCandidates(node, newCandidates);
-			// TODO: ¿Cómo se agregan los nodos a open en IDDFS?
 			break;
 		case GREEDY:
-			newCandidates = new ArrayList<>();
-			addCandidates(node, newCandidates);
-			open.addAll(newCandidates);
 			break;
 		case ASTAR:
 			if (!isBest(node.getState(), node.getCost())) {
 				return;
 			}
-			newCandidates = new ArrayList<>();
-			addCandidates(node, newCandidates);
-			open.addAll(newCandidates);
 			break;
 		}
+		open.addAll(addCandidates(node));
 	}
 
-	private void addCandidates(GPSNode node, Collection<GPSNode> candidates) {
+	private Collection<GPSNode> addCandidates(GPSNode node) {
+		Collection<GPSNode> candidates = new ArrayList<>();
 		explosionCounter++;
 		updateBest(node);
 		for (Rule rule : problem.getRules()) {
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
-				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule);
+				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule, node.getDepth()+1);
 				newNode.setParent(node);
 				candidates.add(newNode);
 			}
 		}
+		return candidates;
 	}
 
 	private boolean isBest(State state, Integer cost) {
@@ -253,4 +214,15 @@ public class GPSEngine {
 		return strategy;
 	}
 
+	private class IDDFSPackage
+	{
+		private boolean remaindingNodes;
+		private GPSNode node;
+
+		public IDDFSPackage(GPSNode node, boolean remaindingNodes)
+		{
+			this.node=node;
+			this.remaindingNodes=remaindingNodes;
+		}
+	}
 }
