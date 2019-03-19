@@ -49,7 +49,7 @@ public class GPSEngine {
 
 		switch(strategy){
 			case BFS:
-				open = new LinkedList<>();
+				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth).reversed());
 				break;
 			case DFS:
 				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth));
