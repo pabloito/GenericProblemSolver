@@ -42,4 +42,16 @@ public class Square extends Tile {
         this.setY(this.getY() + direction.getY());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Square))
+            return false;
+        Square s2 = (Square)obj;
+
+        if(this.getX() != s2.getX() || this.getY() != s2.getY() || this.getObjective().getX() != s2.getObjective().getX()
+        || this.getObjective().getY() != s2.getObjective().getY() || this.color != s2.color || this.getDirection() != s2.getDirection())
+            return false;
+
+        return true;
+    }
 }
