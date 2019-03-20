@@ -2,6 +2,7 @@ package ar.edu.itba.sia.gps;
 
 import java.util.*;
 
+import ar.edu.itba.sia.gps.api.Heuristic;
 import ar.edu.itba.sia.gps.api.Problem;
 import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.gps.api.State;
@@ -27,7 +28,7 @@ public class GPSEngine {
 	private  SearchStrategy strategy;
 
 	public static void main(String args[]){
-		Heuristic heuristic = Heuristic.values()[0];
+		Heuristic heuristic = new GodfridHeuristic();
 		Direction up = UP;
 		Direction down = DOWN;
 		Direction left = LEFT;

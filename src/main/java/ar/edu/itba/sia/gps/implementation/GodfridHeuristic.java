@@ -3,7 +3,7 @@ package ar.edu.itba.sia.gps.implementation;
 import ar.edu.itba.sia.gps.api.Heuristic;
 import ar.edu.itba.sia.gps.api.State;
 
-public class HeuristicImpl implements Heuristic {
+public class GodfridHeuristic implements Heuristic {
 
     @Override
     public Integer getValue(State state) {
