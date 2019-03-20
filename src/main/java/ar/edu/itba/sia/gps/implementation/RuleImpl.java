@@ -26,13 +26,15 @@ public class RuleImpl implements Rule {
     @Override
     public Optional<State> apply(State state) {
 
+        StateImpl oldState = (StateImpl) state;
         //Saves the direction beforehand in case of Changer tiles
         Direction direction = square.getDirection();
 
-        State changed = new StateImpl(((StateImpl) state).getWidth(), ((StateImpl) state).getHeight(), ((StateImpl) state).getSquares(), ((StateImpl) state).getChangers());
+        State changed = new StateImpl(oldState.getWidth(), oldState.getHeight(), oldState.getSquares(), oldState.getChangers());
 
         //Checks before moving if next tile is occupied by a square
-        Optional<Tile> next = ((StateImpl)changed).getTile(square.getX()+ direction.getX(), square.getY()+direction.getY());
+        //ESTO ESTA MAL!!! LA FIRMA DE LA INTERFAZ STATE NO TIENE GETTILE. ESTE METODO TIENE QUE PERTENECER A LA REGLA
+        Optional<Tile> next = oldState.getTile(square.getX()+ direction.getX(), square.getY()+direction.getY());
 
         Tile current = this.square;
 

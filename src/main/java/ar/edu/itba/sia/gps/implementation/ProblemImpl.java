@@ -7,9 +7,18 @@ import ar.edu.itba.sia.gps.api.State;
 import java.util.List;
 
 public class ProblemImpl implements Problem {
+
+    private State initState;
+    private List<Rule> rules;
+
+    public ProblemImpl(State initState, List<Rule> rules){
+        this.initState=initState;
+        this.rules=rules;
+    }
+
     @Override
     public State getInitState() {
-        return null;
+        return initState;
     }
 
     @Override
@@ -19,6 +28,8 @@ public class ProblemImpl implements Problem {
 
     @Override
     public List<Rule> getRules() {
-        return null;
+        return rules;
     }
+
+
 }

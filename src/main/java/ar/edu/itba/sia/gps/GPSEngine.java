@@ -76,7 +76,6 @@ public class GPSEngine {
 
 	public void findSolution() {
 		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null,0);
-		open.add(rootNode);
 		if(strategy==IDDFS)
 		{
 			findSolution_IDDFS(rootNode);
@@ -127,8 +126,8 @@ public class GPSEngine {
 			}
 			else{
 				explode(curr);
-				curr=open.remove();
 			}
+			curr=open.poll();
 		}
 		return new IDDFSPackage(null, remaining);
 	}

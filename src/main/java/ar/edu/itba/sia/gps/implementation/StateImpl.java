@@ -48,10 +48,6 @@ public class StateImpl implements State {
 
     }
 
-    public void setTile(int x, int y, Tile tile){
-        board[x][y]=tile;
-    }
-
     @Override
     public String getRepresentation() {
         String rep = "";
