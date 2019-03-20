@@ -2,7 +2,6 @@ package ar.edu.itba.sia.gps;
 
 import java.util.*;
 
-import ar.edu.itba.sia.gps.api.Heuristic;
 import ar.edu.itba.sia.gps.api.Problem;
 import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.gps.api.State;
@@ -28,7 +27,7 @@ public class GPSEngine {
 	private  SearchStrategy strategy;
 
 	public static void main(String args[]){
-		Heuristic heuristic1 = new HeuristicImpl();
+		Heuristic heuristic = Heuristic.values()[0];
 		Direction up = UP;
 		Direction down = DOWN;
 		Direction left = LEFT;
@@ -42,7 +41,7 @@ public class GPSEngine {
 
 		State s = new StateImpl(4,4,squares, null);
 
-		System.out.println("El valor de h(s) es " + heuristic1.getValue(s));
+		System.out.println("El valor de h(s) es " + heuristic.getValue(s));
 	}
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
