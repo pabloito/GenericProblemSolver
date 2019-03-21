@@ -20,13 +20,14 @@ public class RuleImpl implements Rule {
 
     @Override
     public String getName() {
-        return square.getColor()+" square moves to the" + square.getDirection().getName();
+        return square.getColor()+" square moves " + square.getDirection().getName();
     }
 
     @Override
     public Optional<State> apply(State state) {
 
         StateImpl oldState = (StateImpl) state;
+
         //Saves the direction beforehand in case of Changer tiles
         Direction direction = square.getDirection();
 
@@ -35,7 +36,8 @@ public class RuleImpl implements Rule {
         //Checks before moving if next tile is occupied by a square
         Optional<Tile> next = oldState.getTile(square.getX()+ direction.getX(), square.getY()+direction.getY());
 
-        Tile current = this.square;
+        Tile current = ((StateImpl) changed).getTile(this.square.getX(),this.square.getY()).get();
+        this.square = (Square)current;
 
         Deque<Tile> tilesToBeMoved = new ArrayDeque<>();
 
@@ -43,7 +45,7 @@ public class RuleImpl implements Rule {
                 tilesToBeMoved.add(current);
                 current = next.get();
                 Tile aux = next.get();
-                next = oldState.getTile(aux.getX()+ direction.getX(), aux.getY()+direction.getY());
+                next = ((StateImpl)changed).getTile(aux.getX()+ direction.getX(), aux.getY()+direction.getY());
         }
 
         //If trying to move out of bounds, returns Null state
