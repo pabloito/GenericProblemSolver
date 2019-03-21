@@ -141,7 +141,7 @@ public class StateImpl implements State {
     }
 
     public Optional<Tile> getTile(int x, int y) {
-        if(x>=width || y>=height)
+        if(x>=width || x<0 || y>=height || y<0)
             return Optional.empty();
         return Optional.of(board[x][y]);
     }
