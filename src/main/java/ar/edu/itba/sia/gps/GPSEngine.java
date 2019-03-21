@@ -28,7 +28,8 @@ public class GPSEngine {
 	private  SearchStrategy strategy;
 
 	public static void main(String args[]){
-		ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/test_level.json");
+		ProblemImpl p = new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/test_level.json"));
+		System.out.println("done");
 	}
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
