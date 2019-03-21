@@ -3,6 +3,7 @@ package ar.edu.itba.sia.gps.implementation;
 import ar.edu.itba.sia.gps.api.State;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +23,25 @@ public class StateImpl implements State {
 
     public StateImpl(int width, int height, List<Square> squares, List<Changer> changers) {
         board = new Tile[width][height];
-        this.squares = squares;
-        this.changers = changers;
+
+        this.squares = new ArrayList<>();
+        for(Square s: squares){
+            this.squares.add(new Square(s.getX(),s.getY(),s.getColor(),s.getDirection(),s.getObjective()));
+        }
+        this.changers = new ArrayList<>();
+        if(changers!=null){
+            for(Changer c: changers){
+                Changer toAdd = new Changer(c.getX(),c.getY(),c.getDirection());
+                if(c.getSquare().isPresent()){
+                    Square inOld = c.getSquare().get();
+                    int indexOf = this.squares.indexOf(inOld);
+                    if(indexOf != -1){
+                        c.setSquare(this.squares.get(indexOf));
+                    }
+                }
+                this.changers.add(toAdd);
+            }
+        }
         this.width = width;
         this.height = height;
         initializeBoard();

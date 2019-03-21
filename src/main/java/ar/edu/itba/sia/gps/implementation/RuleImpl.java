@@ -43,7 +43,7 @@ public class RuleImpl implements Rule {
                 tilesToBeMoved.add(current);
                 current = next.get();
                 Tile aux = next.get();
-                next = ((StateImpl)changed).getTile(aux.getX()+ direction.getX(), aux.getY()+direction.getY());
+                next = oldState.getTile(aux.getX()+ direction.getX(), aux.getY()+direction.getY());
         }
 
         //If trying to move out of bounds, returns Null state
