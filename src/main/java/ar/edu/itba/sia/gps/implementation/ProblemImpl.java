@@ -3,9 +3,7 @@ package ar.edu.itba.sia.gps.implementation;
 import ar.edu.itba.sia.gps.api.Problem;
 import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.gps.api.State;
-import jdk.nashorn.internal.parser.JSONParser;
-import sun.plugin.javascript.JSObject;
-
+import org.json.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,7 @@ public class ProblemImpl implements Problem {
     private int width, height;
     private List<Square> squares;
     private List<Changer> changers;
-    public ProblemImpl(JSObject level){
+    public ProblemImpl(JSONObject level){
         //parse level
         //this.width = width;
         //this.height = height;

@@ -4,6 +4,7 @@ import ar.edu.itba.sia.gps.api.Heuristic;
 import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.gps.api.State;
 import ar.edu.itba.sia.gps.implementation.*;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class TestGPSEngine {
 
         Heuristic heuristic = new GodfridHeuristic();
 
-        gpsEngine = new GPSEngine(new ProblemImpl(state,rules),SearchStrategy.IDDFS, heuristic);
+        gpsEngine = new GPSEngine(new ProblemImpl(new JSONObject()),SearchStrategy.IDDFS, heuristic);
     }
 
     @Test
