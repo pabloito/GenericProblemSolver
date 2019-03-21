@@ -30,7 +30,9 @@ public class TestGPSEngine {
 
         Heuristic heuristic = new GodfridHeuristic();
 
-        gpsEngine = new GPSEngine(new ProblemImpl(new JSONObject()),SearchStrategy.IDDFS, heuristic);
+        String level_name = "./src/main/java/ar/edu/itba/sia/gps/problems/test_level.json";
+
+        gpsEngine = new GPSEngine(new ProblemImpl(ProblemImpl.readLevel(level_name)),SearchStrategy.IDDFS, heuristic);
     }
 
     @Test

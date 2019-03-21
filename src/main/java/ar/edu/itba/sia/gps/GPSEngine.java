@@ -28,21 +28,7 @@ public class GPSEngine {
 	private  SearchStrategy strategy;
 
 	public static void main(String args[]){
-		Heuristic heuristic = new GodfridHeuristic();
-		Direction up = UP;
-		Direction down = DOWN;
-		Direction left = LEFT;
-		Direction right = RIGHT;
-
-		List<Square> squares = new ArrayList<>();
-
-		squares.add(new Square(1,0,"red",down,new Tile(1,3)));
-		squares.add(new Square(2,1,"green",down,new Tile(0,2)));
-		squares.add(new Square(3,2,"blue",left,new Tile(0,3)));
-
-		State s = new StateImpl(4,4,squares, null);
-
-		System.out.println("El valor de h(s) es " + heuristic.getValue(s));
+		ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/test_level.json");
 	}
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {

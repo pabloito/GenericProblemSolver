@@ -4,8 +4,12 @@ import ar.edu.itba.sia.gps.api.Problem;
 import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.gps.api.State;
 import org.json.*;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class ProblemImpl implements Problem {
 
@@ -40,5 +44,20 @@ public class ProblemImpl implements Problem {
         return rules;
     }
 
+    public static JSONObject readLevel(String filename){
+        try {
+            InputStream is = new FileInputStream(filename);
 
+            Scanner s = new Scanner(is).useDelimiter("\\A");
+            String jsonTxt = s.hasNext() ? s.next() : "";
+
+            System.out.println(jsonTxt);
+            JSONObject json = new JSONObject(jsonTxt);
+            return json;
+        }
+        catch (FileNotFoundException e){
+            System.out.println("File "+filename+" not found.");
+            return null;
+        }
+    }
 }
