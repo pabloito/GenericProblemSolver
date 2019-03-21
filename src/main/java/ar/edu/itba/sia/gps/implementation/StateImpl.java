@@ -71,8 +71,10 @@ public class StateImpl implements State {
         String rep = "";
         for(int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if(board[j][i] instanceof Square)
+                if(board[j][i] instanceof Square){
+                    rep += ColorsService.getColorCode(((Square)board[j][i]).getColor());
                     rep += "S";
+                    rep += ColorsService.ANSI_RESET;}
                 else if(board[j][i] instanceof Changer) {
                     switch (((Changer) board[j][i]).getDirection()) {
                         case UP:
@@ -93,7 +95,9 @@ public class StateImpl implements State {
                     boolean flag = false;
                     for(Square s : squares) {
                         if(s.getObjective().getX() == j && s.getObjective().getY() == i){
+                            rep += ColorsService.getColorCode(s.getColor());
                             rep += "o";
+                            rep += ColorsService.ANSI_RESET;
                             flag = true;
                         }
                     }
