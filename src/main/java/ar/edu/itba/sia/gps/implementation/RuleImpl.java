@@ -33,7 +33,6 @@ public class RuleImpl implements Rule {
         State changed = new StateImpl(oldState.getWidth(), oldState.getHeight(), oldState.getSquares(), oldState.getChangers());
 
         //Checks before moving if next tile is occupied by a square
-        //ESTO ESTA MAL!!! LA FIRMA DE LA INTERFAZ STATE NO TIENE GETTILE. ESTE METODO TIENE QUE PERTENECER A LA REGLA
         Optional<Tile> next = oldState.getTile(square.getX()+ direction.getX(), square.getY()+direction.getY());
 
         Tile current = this.square;
