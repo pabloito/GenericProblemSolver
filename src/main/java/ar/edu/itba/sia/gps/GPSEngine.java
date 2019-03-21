@@ -29,7 +29,9 @@ public class GPSEngine {
 
 	public static void main(String args[]){
 		ProblemImpl p = new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/test_level.json"));
-		System.out.println("done");
+		GPSEngine gps = new GPSEngine(p,SearchStrategy.DFS,new GodfridHeuristic());
+		gps.findSolution();
+		System.out.println("solution node is "+gps.solutionNode);
 	}
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
@@ -62,6 +64,7 @@ public class GPSEngine {
 	}
 
 	public void findSolution() {
+		boolean first = true;
 		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null,0);
 		if(strategy==IDDFS)
 		{
@@ -69,6 +72,10 @@ public class GPSEngine {
 			return;
 		}
 		while (open.size() <= 0) {
+			if(first){
+				first = false;
+				open.add(rootNode);
+			}
 			GPSNode currentNode = open.remove();
 			if (problem.isGoal(currentNode.getState())) {
 				finished = true;
@@ -146,6 +153,7 @@ public class GPSEngine {
 		for (Rule rule : problem.getRules()) {
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
+				System.out.println(newState.get().getRepresentation());
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule, node.getDepth()+1);
 				newNode.setParent(node);
 				candidates.add(newNode);
