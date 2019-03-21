@@ -8,7 +8,7 @@
       }
     },
     {
-      "x": 4, "y": 5, "color": "blue", "direction": "left",
+      "x": 4, "y": 4, "color": "blue", "direction": "left",
       "objective":
       {
         "x": 1, "y": 2
