@@ -28,7 +28,7 @@ public class GPSEngine {
 	private  SearchStrategy strategy;
 
 	public static void main(String args[]){
-		ProblemImpl p = new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/test_level.json"));
+		ProblemImpl p = new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/level_1.json"));
 		GPSEngine gps = new GPSEngine(p,SearchStrategy.DFS,new GodfridHeuristic());
 		gps.findSolution();
 		System.out.println("solution node is "+gps.solutionNode);
