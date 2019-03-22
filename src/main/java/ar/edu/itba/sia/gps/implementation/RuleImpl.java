@@ -28,15 +28,17 @@ public class RuleImpl implements Rule {
 
         StateImpl oldState = (StateImpl) state;
 
-        //Saves the direction beforehand in case of Changer tiles
-        Direction direction = square.getDirection();
+        Square oldSquare = getSquareFromState(oldState);
 
-        State changed = new StateImpl(oldState.getWidth(), oldState.getHeight(), oldState.getSquares(), oldState.getChangers());
+        //Saves the direction beforehand in case of Changer tiles
+        Direction direction = oldSquare.getDirection();
+
+        StateImpl changed = new StateImpl(oldState.getWidth(), oldState.getHeight(), oldState.getSquares(), oldState.getChangers());
 
         //Checks before moving if next tile is occupied by a square
-        Optional<Tile> next = oldState.getTile(square.getX()+ direction.getX(), square.getY()+direction.getY());
+        Optional<Tile> next = oldState.getTile(oldSquare.getX()+ direction.getX(), oldSquare.getY()+direction.getY());
 
-        Tile current = ((StateImpl) changed).getTile(this.square.getX(),this.square.getY()).get();
+        Tile current = changed.getTile(this.square.getX(),this.square.getY()).get();
         this.square = (Square)current;
 
         Deque<Tile> tilesToBeMoved = new ArrayDeque<>();
@@ -45,7 +47,7 @@ public class RuleImpl implements Rule {
                 tilesToBeMoved.add(current);
                 current = next.get();
                 Tile aux = next.get();
-                next = ((StateImpl)changed).getTile(aux.getX()+ direction.getX(), aux.getY()+direction.getY());
+                next = changed.getTile(aux.getX()+ direction.getX(), aux.getY()+direction.getY());
         }
 
         //If trying to move out of bounds, returns Null state
@@ -56,7 +58,7 @@ public class RuleImpl implements Rule {
 
         while (!tilesToBeMoved.isEmpty()){
                 Tile t = tilesToBeMoved.removeLast();
-                Tile destination = ((StateImpl) changed).getTile(t.getX()+direction.getX(),t.getY()+direction.getY()).get();
+                Tile destination = changed.getTile(t.getX()+direction.getX(),t.getY()+direction.getY()).get();
                 Square square;
                 if(t instanceof Changer){
                     square = ((Changer) t).getSquare().get();
@@ -64,10 +66,10 @@ public class RuleImpl implements Rule {
                 }
                 else {
                     square = (Square)t;
-                    ((StateImpl) changed).getBoard()[t.getX()][t.getY()] = new Tile(t.getX(),t.getY());
+                    changed.getBoard()[t.getX()][t.getY()] = new Tile(t.getX(),t.getY());
                 }
                 square.move(direction);
-                ((StateImpl) changed).getBoard()[destination.getX()][destination.getY()] = square;
+                changed.getBoard()[destination.getX()][destination.getY()] = square;
                 if(destination instanceof Changer) {
                     square.setDirection(((Changer) destination).getDirection());
                     ((Changer) destination).setSquare(square);
@@ -75,5 +77,15 @@ public class RuleImpl implements Rule {
         }
 
         return Optional.of(changed);
+    }
+
+    private Square getSquareFromState(StateImpl oldState) {
+        for(Square square : oldState.getSquares()){
+            if(square.getColor().equals(this.square.getColor())){
+                return square;
+            }
+        }
+        throw new IllegalArgumentException("Square color not found in state");
+
     }
 }

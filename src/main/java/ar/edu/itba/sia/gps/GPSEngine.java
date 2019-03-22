@@ -64,18 +64,18 @@ public class GPSEngine {
 	}
 
 	public void findSolution() {
-		boolean first = true;
-		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null,0);
-		if(strategy==IDDFS)
-		{
+		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null, 0);
+
+		if (strategy == IDDFS) {
 			findSolution_IDDFS(rootNode);
-			return;
+		} else {
+			open.add(rootNode);
+			findSolution_Generic();
 		}
-		while (open.size() <= 0) {
-			if(first){
-				first = false;
-				open.add(rootNode);
-			}
+	}
+	private void findSolution_Generic()
+	{
+		while (open.size() > 0) {
 			GPSNode currentNode = open.remove();
 			if (problem.isGoal(currentNode.getState())) {
 				finished = true;
@@ -89,12 +89,13 @@ public class GPSEngine {
 		finished = true;
 	}
 
-	private void findSolution_IDDFS(GPSNode rootNode) {
+	private void findSolution_IDDFS(GPSNode initNode) {
 		IDDFSPackage pack = new IDDFSPackage(null,true);
 		int depth =0;
 		while(pack.remaindingNodes)
 		{
-			pack= depthLimitedDFS(rootNode,depth);
+			open.add(initNode);
+			pack= depthLimitedDFS(depth);
 			if(pack.node!=null){
 				finished=true;
 				solutionNode=pack.node;
@@ -106,9 +107,9 @@ public class GPSEngine {
 		failed=true;
 	}
 
-	private IDDFSPackage depthLimitedDFS(GPSNode initNode, int depth) {
+	private IDDFSPackage depthLimitedDFS(int depth) {
 
-		GPSNode curr = initNode;
+		GPSNode curr = open.poll();
 		boolean remaining=false;
 
 		while(curr!=null) {
@@ -132,7 +133,7 @@ public class GPSEngine {
 			case DFS:
 			case IDDFS:
 				if (bestCosts.containsKey(node.getState())) {
-					return;
+					//return;
 				}
 				break;
 			case GREEDY:
