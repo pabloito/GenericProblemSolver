@@ -36,7 +36,7 @@ public class StateImpl implements State {
                     Square inOld = c.getSquare().get();
                     int indexOf = this.squares.indexOf(inOld);
                     if(indexOf != -1){
-                        c.setSquare(this.squares.get(indexOf));
+                        toAdd.setSquare(this.squares.get(indexOf));
                     }
                 }
                 this.changers.add(toAdd);

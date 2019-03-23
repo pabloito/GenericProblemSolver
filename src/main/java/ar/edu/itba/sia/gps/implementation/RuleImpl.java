@@ -39,7 +39,10 @@ public class RuleImpl implements Rule {
         Optional<Tile> next = changed.getTile(oldSquare.getX()+ direction.getX(), oldSquare.getY()+direction.getY());
 
         Tile current = changed.getTile(oldSquare.getX(),oldSquare.getY()).get();
-        this.square = (Square)current;
+        if (current instanceof Changer)
+            this.square = ((Changer)current).getSquare().get();
+        else
+            this.square = (Square)current;
 
         Deque<Tile> tilesToBeMoved = new ArrayDeque<>();
 

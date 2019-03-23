@@ -28,7 +28,7 @@ public class GPSEngine {
 	private  SearchStrategy strategy;
 
 	public static void main(String args[]){
-		ProblemImpl p = new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/level_1.json"));
+		ProblemImpl p = new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/level_3.json"));
 		GPSEngine gps = new GPSEngine(p,SearchStrategy.DFS,new MaxPathHeuristic());
 		gps.findSolution();
 		System.out.println("Solution:\n"+gps.solutionNode.getSolution());
@@ -155,6 +155,7 @@ public class GPSEngine {
 		for (Rule rule : problem.getRules()) {
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
+				System.out.println(newState.get().getRepresentation());
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule, node.getDepth()+1);
 				newNode.setParent(node);
 				candidates.add(newNode);
