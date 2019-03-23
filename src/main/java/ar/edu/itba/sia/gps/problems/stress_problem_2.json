@@ -1,0 +1,28 @@
+{
+  "width": 15, "height":15, "squares": [
+    {
+      "x": 1, "y": 0, "color": "blue", "direction": "down",
+      "objective":
+      {
+        "x": 13, "y": 14
+      }
+    },
+    {
+      "x": 13, "y": 1, "color": "red", "direction": "left",
+      "objective":
+      {
+        "x": 0, "y": 14
+      }
+    },
+    {
+      "x": 0, "y": 0, "color": "purple", "direction": "right",
+      "objective":
+      {
+        "x": 14, "y": 0
+      }
+    }
+  ],
+
+  "changers": [
+  ]
+}
