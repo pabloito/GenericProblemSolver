@@ -29,6 +29,9 @@
   },
   {
     "x": 2, "y": 3, "direction": "up"
+  },
+  {
+    "x": 2, "y": 0, "direction": "left"
   }
   ]
 }
