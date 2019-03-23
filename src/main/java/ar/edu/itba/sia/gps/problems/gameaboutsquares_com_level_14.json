@@ -8,14 +8,14 @@
     }
   },
   {
-    "x": 0, "y": 1, "color": "orange", "direction": "right",
+    "x": 0, "y": 1, "color": "green", "direction": "right",
     "objective":
     {
       "x": 2, "y": 0
     }
   },
   {
-    "x": 1, "y": 2, "color": "lightBlue", "direction": "up",
+    "x": 1, "y": 2, "color": "purple", "direction": "up",
     "objective":
     {
       "x": 1, "y": 1

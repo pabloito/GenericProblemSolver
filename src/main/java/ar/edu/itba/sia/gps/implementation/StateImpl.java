@@ -70,32 +70,32 @@ public class StateImpl implements State {
                     rep += ColorsService.getColorCode(((Square)board[j][i]).getColor());
                     switch (((Square) board[j][i]).getDirection()) {
                         case UP:
-                            rep += "^";
+                            rep += "\u21D1";
                             break;
                         case DOWN:
-                            rep += "v";
+                            rep += "\u21D3";
                             break;
                         case LEFT:
-                            rep += "<";
+                            rep += "\u21D0";
                             break;
                         case RIGHT:
-                            rep += ">";
+                            rep += "\u21D2";
                             break;
                     }
                     rep += ColorsService.ANSI_RESET;
                 } else if(board[j][i] instanceof Changer) {
                     switch (((Changer) board[j][i]).getDirection()) {
                         case UP:
-                            rep += "^";
+                            rep += "\u2191";
                             break;
                         case DOWN:
-                            rep += "v";
+                            rep += "\u2193";
                             break;
                         case LEFT:
-                            rep += "<";
+                            rep += "\u2190";
                             break;
                         case RIGHT:
-                            rep += ">";
+                            rep += "\u2192";
                             break;
                     }
                 } else {

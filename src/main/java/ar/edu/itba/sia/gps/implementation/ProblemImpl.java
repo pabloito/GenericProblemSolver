@@ -31,6 +31,35 @@ public class ProblemImpl implements Problem {
         String color,direction_string;
         Direction direction;
 
+        Changer newch;
+        JSONArray ch = level.getJSONArray("changers");
+        for(Object o : ch) {
+            JSONObject obj = (JSONObject) o;
+
+            x = (int) obj.get("x");
+            y = (int) obj.get("y");
+            direction_string = (String) obj.get("direction");
+
+            switch (direction_string) {
+                case "up":
+                    direction = UP;
+                    break;
+                case "down":
+                    direction = DOWN;
+                    break;
+                case "left":
+                    direction = LEFT;
+                    break;
+                case "right":
+                    direction = RIGHT;
+                    break;
+                default:
+                    direction = null;
+            }
+            newch = new Changer(x, y, direction);
+            changers.add(newch);
+        }
+
         JSONArray sq = level.getJSONArray("squares");
         for(Object o : sq) {
             JSONObject obj = (JSONObject)o;
@@ -59,70 +88,15 @@ public class ProblemImpl implements Problem {
                     direction = null;
             }
 
-            squares.add(new Square(x,y,color,direction,new Tile(obj_x,obj_y)));
-        }
+            Square newSquare = new Square(x,y,color,direction,new Tile(obj_x,obj_y));
 
-        Square square;
-        Changer newch;
-        JSONArray ch = level.getJSONArray("changers");
-        for(Object o : ch) {
-            JSONObject obj = (JSONObject) o;
-
-            x = (int) obj.get("x");
-            y = (int) obj.get("y");
-            direction_string = (String) obj.get("direction");
-
-            switch (direction_string) {
-                case "up":
-                    direction = UP;
-                    break;
-                case "down":
-                    direction = DOWN;
-                    break;
-                case "left":
-                    direction = LEFT;
-                    break;
-                case "right":
-                    direction = RIGHT;
-                    break;
-                default:
-                    direction = null;
+            squares.add(newSquare);
+            for (Changer changer: changers) {
+                if(changer.getX()==x && changer.getY()==y)
+                {
+                    changer.setSquare(newSquare);
+                }
             }
-
-            //JSONObject chsq = (JSONObject) ((JSONObject)o).get("square");
-
-            newch = new Changer(x, y, direction);
-
-//            if(chsq!=null){
-//                x = (int)chsq.get("x");
-//                y = (int)chsq.get("y");
-//                color = (String)chsq.get("color");
-//                direction_string = (String)chsq.get("direction");
-//
-//                switch(direction_string){
-//                    case "up":
-//                        direction = UP;
-//                        break;
-//                    case "down":
-//                        direction = DOWN;
-//                        break;
-//                    case "left":
-//                        direction = LEFT;
-//                        break;
-//                    case "right":
-//                        direction = RIGHT;
-//                        break;
-//                    default:
-//                        direction = null;
-//                }
-//
-//                obj_x = (int)((JSONObject)chsq.get("objective")).get("x");
-//                obj_y = (int)((JSONObject)chsq.get("objective")).get("y");
-//
-//                square = new Square(x,y,color,direction,new Tile(obj_x,obj_y));
-//
-//                newch.setSquare(square);
-            changers.add(newch);
         }
     }
 

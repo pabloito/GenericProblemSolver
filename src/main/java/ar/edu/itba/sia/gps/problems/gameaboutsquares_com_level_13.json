@@ -1,0 +1,31 @@
+{
+  "width": 4, "height": 6, "squares": [
+  {
+    "x": 1, "y": 1, "color": "blue", "direction": "down",
+    "objective":
+    {
+      "x": 1, "y": 0
+    }
+  },
+  {
+    "x": 3, "y": 3, "color": "green", "direction": "left",
+    "objective":
+    {
+      "x": 0, "y": 4
+    }
+  },
+  {
+    "x": 2, "y": 5, "color": "purple", "direction": "up",
+    "objective":
+    {
+      "x": 1, "y": 2
+    }
+  }
+],
+
+  "changers": [
+    {
+      "x": 1, "y": 1, "direction": "down"
+    }
+  ]
+}
