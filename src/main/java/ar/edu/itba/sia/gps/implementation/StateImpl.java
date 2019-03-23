@@ -73,9 +73,22 @@ public class StateImpl implements State {
             for (int j = 0; j < width; j++) {
                 if(board[j][i] instanceof Square){
                     rep += ColorsService.getColorCode(((Square)board[j][i]).getColor());
-                    rep += "S";
-                    rep += ColorsService.ANSI_RESET;}
-                else if(board[j][i] instanceof Changer) {
+                    switch (((Square) board[j][i]).getDirection()) {
+                        case UP:
+                            rep += "^";
+                            break;
+                        case DOWN:
+                            rep += "v";
+                            break;
+                        case LEFT:
+                            rep += "<";
+                            break;
+                        case RIGHT:
+                            rep += ">";
+                            break;
+                    }
+                    rep += ColorsService.ANSI_RESET;
+                } else if(board[j][i] instanceof Changer) {
                     switch (((Changer) board[j][i]).getDirection()) {
                         case UP:
                             rep += "^";
@@ -90,8 +103,7 @@ public class StateImpl implements State {
                             rep += ">";
                             break;
                     }
-                }
-                else{
+                } else {
                     boolean flag = false;
                     for(Square s : squares) {
                         if(s.getObjective().getX() == j && s.getObjective().getY() == i){
@@ -103,13 +115,12 @@ public class StateImpl implements State {
                     }
                     if(!flag)
                         rep += "x";
-
-
                 }
                 rep+="  ";
             }
             rep += "\n";
         }
+        rep += "\n";
         return rep;
     }
 

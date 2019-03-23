@@ -29,19 +29,19 @@ public class GPSEngine {
 
 	public static void main(String args[]){
 		ProblemImpl p = new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/level_1.json"));
-		GPSEngine gps = new GPSEngine(p,SearchStrategy.DFS,new GodfridHeuristic());
+		GPSEngine gps = new GPSEngine(p,SearchStrategy.DFS,new MaxPathHeuristic());
 		gps.findSolution();
-		System.out.println("solution node is "+gps.solutionNode);
+		System.out.println("Solution:\n"+gps.solutionNode.getSolution());
 	}
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
 
 		switch(strategy){
 			case BFS:
-				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth).reversed());
+				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth));
 				break;
 			case DFS:
-				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth));
+				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth).reversed());
 				break;
 			case ASTAR:
 				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n)-> (n.getCost()+heuristic.getValue(n.getState()))));
@@ -65,7 +65,6 @@ public class GPSEngine {
 
 	public void findSolution() {
 		GPSNode rootNode = new GPSNode(problem.getInitState(), 0, null, 0);
-
 		if (strategy == IDDFS) {
 			findSolution_IDDFS(rootNode);
 		} else {
@@ -130,7 +129,9 @@ public class GPSEngine {
 	private void explode(GPSNode node) {
 		switch (strategy) {
 			case BFS:
+				break;
 			case DFS:
+				break;
 			case IDDFS:
 				if (bestCosts.containsKey(node.getState())) {
 					//return;
@@ -154,7 +155,6 @@ public class GPSEngine {
 		for (Rule rule : problem.getRules()) {
 			Optional<State> newState = rule.apply(node.getState());
 			if (newState.isPresent()) {
-				System.out.println(newState.get().getRepresentation());
 				GPSNode newNode = new GPSNode(newState.get(), node.getCost() + rule.getCost(), rule, node.getDepth()+1);
 				newNode.setParent(node);
 				candidates.add(newNode);

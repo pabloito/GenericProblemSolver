@@ -155,7 +155,6 @@ public class ProblemImpl implements Problem {
             Scanner s = new Scanner(is).useDelimiter("\\A");
             String jsonTxt = s.hasNext() ? s.next() : "";
 
-            System.out.println(jsonTxt);
             JSONObject json = new JSONObject(jsonTxt);
             return json;
         }

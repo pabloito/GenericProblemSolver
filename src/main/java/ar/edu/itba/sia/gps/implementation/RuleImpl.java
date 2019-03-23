@@ -36,9 +36,9 @@ public class RuleImpl implements Rule {
         StateImpl changed = new StateImpl(oldState.getWidth(), oldState.getHeight(), oldState.getSquares(), oldState.getChangers());
 
         //Checks before moving if next tile is occupied by a square
-        Optional<Tile> next = oldState.getTile(oldSquare.getX()+ direction.getX(), oldSquare.getY()+direction.getY());
+        Optional<Tile> next = changed.getTile(oldSquare.getX()+ direction.getX(), oldSquare.getY()+direction.getY());
 
-        Tile current = changed.getTile(this.square.getX(),this.square.getY()).get();
+        Tile current = changed.getTile(oldSquare.getX(),oldSquare.getY()).get();
         this.square = (Square)current;
 
         Deque<Tile> tilesToBeMoved = new ArrayDeque<>();
@@ -86,6 +86,5 @@ public class RuleImpl implements Rule {
             }
         }
         throw new IllegalArgumentException("Square color not found in state");
-
     }
 }
