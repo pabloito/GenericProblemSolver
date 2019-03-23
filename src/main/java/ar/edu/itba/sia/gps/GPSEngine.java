@@ -31,7 +31,10 @@ public class GPSEngine {
 		ProblemImpl p = new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/level_3.json"));
 		GPSEngine gps = new GPSEngine(p,SearchStrategy.DFS,new MaxPathHeuristic());
 		gps.findSolution();
-		System.out.println("Solution:\n"+gps.solutionNode.getSolution());
+		if(!gps.failed){
+			System.out.println("Solution:\n"+gps.solutionNode.getSolution());
+		}
+		System.out.println("Failed");
 	}
 
 	public GPSEngine(Problem problem, SearchStrategy strategy, Heuristic heuristic) {
@@ -93,7 +96,7 @@ public class GPSEngine {
 		int depth =0;
 		while(pack.remaindingNodes)
 		{
-			open.add(initNode);
+			Initialize_IDDFS(initNode);
 			pack= depthLimitedDFS(depth);
 			if(pack.node!=null){
 				finished=true;
@@ -104,6 +107,11 @@ public class GPSEngine {
 		}
 		finished=true;
 		failed=true;
+	}
+
+	private void Initialize_IDDFS(GPSNode initNode) {
+		bestCosts = new HashMap<>();
+		open.add(initNode);
 	}
 
 	private IDDFSPackage depthLimitedDFS(int depth) {
@@ -129,12 +137,10 @@ public class GPSEngine {
 	private void explode(GPSNode node) {
 		switch (strategy) {
 			case BFS:
-				break;
 			case DFS:
-				break;
 			case IDDFS:
 				if (bestCosts.containsKey(node.getState())) {
-					//return;
+					return;
 				}
 				break;
 			case GREEDY:

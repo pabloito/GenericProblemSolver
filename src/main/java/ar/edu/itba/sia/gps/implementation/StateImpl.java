@@ -16,11 +16,6 @@ public class StateImpl implements State {
     private List<Changer> changers;
     private int width, height;
 
-    @Override
-    public int hashCode() {
-        return squares.hashCode();
-    }
-
     public StateImpl(int width, int height, List<Square> squares, List<Changer> changers) {
         board = new Tile[width][height];
 
@@ -134,22 +129,44 @@ public class StateImpl implements State {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StateImpl state = (StateImpl) o;
+
+        if (!squares.equals(state.squares)) return false;
+        return changers.equals(state.changers);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = squares.hashCode();
+        result = 31 * result + changers.hashCode();
+        return result;
+    }
+
+    /*
+    @Override
     public boolean equals(Object state) {
-        if(state instanceof State){
-            StateImpl s2 = (StateImpl)state;
-            if(s2.getSquares().size() == this.getSquares().size() && s2.getChangers().size() == this.getChangers().size()){
-                if(!Arrays.deepEquals(s2.getSquares().toArray(), this.getSquares().toArray()) || !Arrays.deepEquals(s2.getChangers().toArray(), this.getChangers().toArray()))
-                    return false;
-            }
-            else {
-                return false;
-            }
+        if(state==this){
+            return true;
         }
-        else {
+        if(!(state instanceof State)) {
             return false;
         }
-        return true;
+        StateImpl s2 = (StateImpl)state;
+        return Arrays.deepEquals(s2.getSquares().toArray(), this.getSquares().toArray()) &&
+                    Arrays.deepEquals(s2.getChangers().toArray(), this.getChangers().toArray());
     }
+
+
+    @Override
+    public int hashCode() {
+        int result = squares.hashCode();
+        return squares.hashCode();
+    }
+*/
 
     public Optional<Tile> getTile(int x, int y) {
         if(x>=width || x<0 || y>=height || y<0)

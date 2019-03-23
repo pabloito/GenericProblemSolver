@@ -12,13 +12,6 @@ public class Square extends Tile {
         this.objective = objective;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 17;
-        hash = hash * 31 + getX();
-        hash = hash * 31 + getY();
-        return hash;
-    }
 
     public String getColor() {
         return color;
@@ -52,14 +45,22 @@ public class Square extends Tile {
 
     @Override
     public boolean equals(Object obj) {
+        if(obj==this) return true;
         if (!(obj instanceof Square))
             return false;
         Square s2 = (Square)obj;
 
-        if(this.getX() != s2.getX() || this.getY() != s2.getY() || this.getObjective().getX() != s2.getObjective().getX()
-        || this.getObjective().getY() != s2.getObjective().getY() || this.color != s2.color || this.getDirection() != s2.getDirection())
-            return false;
+        return this.getX()==s2.getX() && this.getY() == s2.getY() &&
+                this.getObjective().equals(s2.getObjective()) &&
+                this.getDirection().equals(s2.getDirection());
+    }
 
-        return true;
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + color.hashCode();
+        result = 31 * result + direction.hashCode();
+        result = 31 * result + objective.hashCode();
+        return result;
     }
 }
