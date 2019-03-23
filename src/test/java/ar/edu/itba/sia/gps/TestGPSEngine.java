@@ -25,7 +25,7 @@ public class TestGPSEngine {
     @Before
     public void setup(){
         Heuristic heuristic = new GodfridHeuristic();
-        gpsEngine = new GPSEngine(new ProblemImpl(ProblemImpl.readLevel(level_name)),SearchStrategy.DFS, heuristic);
+        gpsEngine = new GPSEngine(new ProblemImpl(ProblemImpl.readLevel(level_name)),SearchStrategy.GREEDY, heuristic);
     }
 
     @Test
@@ -46,7 +46,8 @@ public class TestGPSEngine {
                         {"./src/main/java/ar/edu/itba/sia/gps/problems/level_2.json"},
                         {"./src/main/java/ar/edu/itba/sia/gps/problems/level_3.json"},
                         {"./src/main/java/ar/edu/itba/sia/gps/problems/gameaboutsquares_com_level_13.json"},
-                        {"./src/main/java/ar/edu/itba/sia/gps/problems/gameaboutsquares_com_level_14.json"}
+                        {"./src/main/java/ar/edu/itba/sia/gps/problems/gameaboutsquares_com_level_14.json"},
+                        {"./src/main/java/ar/edu/itba/sia/gps/problems/stress_problem.json"}
                 });
     }
 }
