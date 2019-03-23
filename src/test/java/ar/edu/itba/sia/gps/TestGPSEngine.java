@@ -25,7 +25,7 @@ public class TestGPSEngine {
     @Before
     public void setup(){
         Heuristic heuristic = new GodfridHeuristic();
-        gpsEngine = new GPSEngine(new ProblemImpl(ProblemImpl.readLevel(level_name)),SearchStrategy.ASTAR, heuristic);
+        gpsEngine = new GPSEngine(new ProblemImpl(ProblemImpl.readLevel(level_name)),SearchStrategy.IDDFS, heuristic);
     }
 
     @Test

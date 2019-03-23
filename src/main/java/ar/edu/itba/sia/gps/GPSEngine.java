@@ -40,7 +40,7 @@ public class GPSEngine {
 				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n)-> (n.getCost()+heuristic.getValue(n.getState()))));
 				break;
 			case IDDFS:
-				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth));
+				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth).reversed());
 				break;
 			case GREEDY:
 				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n) -> heuristic.getValue(n.getState())));
@@ -129,11 +129,10 @@ public class GPSEngine {
 			case BFS:
 			case DFS:
 			case IDDFS:
+			case GREEDY:
 				if (bestCosts.containsKey(node.getState())) {
 					return;
 				}
-				break;
-			case GREEDY:
 				break;
 			case ASTAR:
 				if (!isBest(node.getState(), node.getCost())) {
