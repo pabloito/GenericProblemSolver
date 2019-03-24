@@ -66,7 +66,6 @@ public class TestGPSEngine {
         Assert.assertTrue(gpsEngine.isFinished());
         Assert.assertFalse(gpsEngine.isFailed());
         Assert.assertNotNull(gpsEngine.getSolutionNode());
-        System.out.println(gpsEngine.getSolutionNode().getSolution());
     }
 
     @Parameterized.Parameters
