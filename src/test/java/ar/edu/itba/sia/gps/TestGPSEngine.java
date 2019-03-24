@@ -36,12 +36,18 @@ public class TestGPSEngine {
     public Stopwatch stopwatch = new Stopwatch() {
         @Override
         protected void succeeded(long nanos, Description description) {
-            TimeComparer.getInstance().addTime(searchStrategy, level_name, nanos);
+            MetricComparer.getInstance().addTime(searchStrategy, level_name, nanos);
+            MetricComparer.getInstance().addCost(searchStrategy,level_name,gpsEngine.getSolutionNode().getCost());
+            MetricComparer.getInstance().addDepth(searchStrategy,level_name,gpsEngine.getSolutionNode().getDepth());
+            MetricComparer.getInstance().addResult(searchStrategy,level_name,true);
+            MetricComparer.getInstance().addExpandedNodes(searchStrategy,level_name,gpsEngine.getExplosionCounter());
+            MetricComparer.getInstance().addFrontierNodes(searchStrategy,level_name,gpsEngine.getOpen().size());
+            MetricComparer.getInstance().addAnalyzedNodes(searchStrategy,level_name,gpsEngine.getBestCosts().size());
         }
 
         @Override
         protected void failed(long nanos, Throwable e, Description description) {
-            TimeComparer.getInstance().addTime(searchStrategy, level_name, nanos);
+            MetricComparer.getInstance().addTime(searchStrategy, level_name, nanos);
         }
 
         @Override
@@ -56,7 +62,7 @@ public class TestGPSEngine {
 
     @AfterClass
     public static void printResults(){
-        TimeComparer.getInstance().printResults();
+        MetricComparer.getInstance().printResults();
     }
 
     @Test
