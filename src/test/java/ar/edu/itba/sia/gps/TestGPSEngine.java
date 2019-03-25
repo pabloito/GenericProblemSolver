@@ -78,7 +78,7 @@ public class TestGPSEngine {
     public static Collection paramaters(){
         return Arrays.asList(new Object[][]
                 {
-                        {"level_1",SearchStrategy.DFS},
+                        /*{"level_1",SearchStrategy.DFS},
                         {"level_2",SearchStrategy.DFS},
                         {"level_3",SearchStrategy.DFS},
                         {"gameaboutsquares_com_level_13",SearchStrategy.DFS},
@@ -100,7 +100,8 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_13",SearchStrategy.IDDFS},
                         {"gameaboutsquares_com_level_14",SearchStrategy.IDDFS},
                         {"stress_problem",SearchStrategy.IDDFS},
-                        {"stress_problem_2",SearchStrategy.IDDFS},
+                        {"stress_problem_2",SearchStrategy.IDDFS},*/
+                        {"no_solution",SearchStrategy.IDDFS}/*,
 
                         {"level_1",SearchStrategy.GREEDY},
                         {"level_2",SearchStrategy.GREEDY},
@@ -116,7 +117,7 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_13",SearchStrategy.ASTAR},
                         {"gameaboutsquares_com_level_14",SearchStrategy.ASTAR},
                         {"stress_problem",SearchStrategy.ASTAR},
-                        {"stress_problem_2",SearchStrategy.ASTAR},
+                        {"stress_problem_2",SearchStrategy.ASTAR},*/
                 });
     }
 }
