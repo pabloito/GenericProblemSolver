@@ -6,17 +6,14 @@ import ar.edu.itba.sia.gps.api.Heuristic;
 import ar.edu.itba.sia.gps.api.Problem;
 import ar.edu.itba.sia.gps.api.Rule;
 import ar.edu.itba.sia.gps.api.State;
-import ar.edu.itba.sia.gps.implementation.*;
-
-import javax.naming.OperationNotSupportedException;
 
 import static ar.edu.itba.sia.gps.SearchStrategy.IDDFS;
-import static ar.edu.itba.sia.gps.implementation.Direction.*;
 
 public class GPSEngine {
 
 	private Queue<GPSNode> open;
-	private Map<State, Integer> bestCosts;
+	private List<GPSNode> iddfsFrontier;
+	private Map<State, CostAndDepth> bestCosts;
 	private Problem problem;
 	private long explosionCounter;
 	private boolean finished;
@@ -48,6 +45,7 @@ public class GPSEngine {
 		}
 
 		bestCosts = new HashMap<>();
+		iddfsFrontier = new ArrayList<>();
 		this.problem = problem;
 		this.strategy = strategy;
 		this.heuristic = heuristic;
@@ -100,40 +98,61 @@ public class GPSEngine {
 	}
 
 	private void Initialize_IDDFS(GPSNode initNode) {
-		bestCosts = new HashMap<>();
+		bestCosts.clear();
+		open.clear();
 		open.add(initNode);
+		iddfsFrontier.clear();
 	}
 
-	private IDDFSPackage depthLimitedDFS(int depth) {
 
-		GPSNode curr = open.poll();
-		boolean remaining=false;
-
-		while(curr!=null) {
-			if (curr.getDepth() == depth) {
-				if (problem.isGoal(curr.getState())) {
-					return new IDDFSPackage(curr, true); //El booleano no importa
+	private IDDFSPackage depthLimitedDFS(int depth)	{
+		System.out.println("Running DFS for depth: '"+depth+"'");
+		while (open.size() > 0) {
+			GPSNode currentNode = open.remove();
+			if(currentNode.getDepth()==depth){
+				if (problem.isGoal(currentNode.getState())) {
+					return new IDDFSPackage(currentNode,true);
 				}
-				remaining=true;
+				explode(currentNode,depth);
 			}
 			else{
-				explode(curr);
+				explode(currentNode);
 			}
-			curr=open.poll();
 		}
-		return new IDDFSPackage(null, remaining);
+		return new IDDFSPackage(null,hasRemainingNodes());
 	}
 
-	private void explode(GPSNode node) {
+	private boolean hasRemainingNodes() {
+		System.out.println("Frontier Size: '"+ iddfsFrontier.size()+"'");
+		for (GPSNode node : iddfsFrontier) {
+			if(!bestCosts.containsKey(node.getState())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void explode(GPSNode node){
+		explode(node,-1);
+	}
+
+	private void explode(GPSNode node, int depth) {
 		switch (strategy) {
 			case BFS:
 			case DFS:
-			case IDDFS:
 			case GREEDY:
 				if (bestCosts.containsKey(node.getState())) {
 					return;
 				}
 				break;
+			case IDDFS:
+				if (!isShallowest(node.getState(),node.getDepth())) {
+					return;
+				}
+				if(node.getDepth()==depth){
+					iddfsFrontier.addAll(addCandidates(node));
+					return;
+				}
 			case ASTAR:
 				if (!isBest(node.getState(), node.getCost())) {
 					return;
@@ -159,14 +178,37 @@ public class GPSEngine {
 	}
 
 	private boolean isBest(State state, Integer cost) {
-		return !bestCosts.containsKey(state) || cost < bestCosts.get(state);
+		return !bestCosts.containsKey(state) || cost < bestCosts.get(state).getCost();
+	}
+
+	private boolean isShallowest(State state, Integer depth){
+		return !bestCosts.containsKey(state) || depth < bestCosts.get(state).getDepth();
+
 	}
 
 	private void updateBest(GPSNode node) {
-		bestCosts.put(node.getState(), node.getCost());
+		bestCosts.put(node.getState(), new CostAndDepth(node.getCost(),node.getDepth()));
 	}
 
 
+
+
+	private class CostAndDepth{
+		private int cost;
+		private int depth;
+		CostAndDepth(int cost, int depth){
+			this.cost=cost;
+			this.depth=depth;
+		}
+
+		public int getCost() {
+			return cost;
+		}
+
+		public int getDepth() {
+			return depth;
+		}
+	}
 
 
 
@@ -176,7 +218,7 @@ public class GPSEngine {
 		return open;
 	}
 
-	public Map<State, Integer> getBestCosts() {
+	public Map<State, CostAndDepth> getBestCosts() {
 		return bestCosts;
 	}
 
@@ -214,5 +256,13 @@ public class GPSEngine {
 			this.node=node;
 			this.remaindingNodes=remaindingNodes;
 		}
+	}
+
+	public List<GPSNode> getIddfsFrontier() {
+		return iddfsFrontier;
+	}
+
+	public int getFrontierNodes(){
+		return open.size()+ iddfsFrontier.size();
 	}
 }

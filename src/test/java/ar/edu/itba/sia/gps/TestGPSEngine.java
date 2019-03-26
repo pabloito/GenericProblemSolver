@@ -36,18 +36,23 @@ public class TestGPSEngine {
     public Stopwatch stopwatch = new Stopwatch() {
         @Override
         protected void succeeded(long nanos, Description description) {
-            MetricComparer.getInstance().addTime(searchStrategy, level_name, nanos);
-            MetricComparer.getInstance().addCost(searchStrategy,level_name,gpsEngine.getSolutionNode().getCost());
-            MetricComparer.getInstance().addDepth(searchStrategy,level_name,gpsEngine.getSolutionNode().getDepth());
-            MetricComparer.getInstance().addResult(searchStrategy,level_name,true);
-            MetricComparer.getInstance().addExpandedNodes(searchStrategy,level_name,gpsEngine.getExplosionCounter());
-            MetricComparer.getInstance().addFrontierNodes(searchStrategy,level_name,gpsEngine.getOpen().size());
-            MetricComparer.getInstance().addAnalyzedNodes(searchStrategy,level_name,gpsEngine.getBestCosts().size());
+            fillData(true,nanos);
         }
 
         @Override
         protected void failed(long nanos, Throwable e, Description description) {
+            fillData(false,nanos);
+        }
+
+        private void fillData(boolean b, long nanos) {
             MetricComparer.getInstance().addTime(searchStrategy, level_name, nanos);
+            MetricComparer.getInstance().addCost(searchStrategy,level_name,gpsEngine.getSolutionNode().getCost());
+            MetricComparer.getInstance().addDepth(searchStrategy,level_name,gpsEngine.getSolutionNode().getDepth());
+            MetricComparer.getInstance().addResult(searchStrategy,level_name,false);
+            MetricComparer.getInstance().addExpandedNodes(searchStrategy,level_name,gpsEngine.getExplosionCounter());
+            MetricComparer.getInstance().addFrontierNodes(searchStrategy,level_name,gpsEngine.getFrontierNodes());
+            MetricComparer.getInstance().addAnalyzedNodes(searchStrategy,level_name,gpsEngine.getBestCosts().size());
+
         }
 
         @Override
@@ -78,7 +83,7 @@ public class TestGPSEngine {
     public static Collection paramaters(){
         return Arrays.asList(new Object[][]
                 {
-                        /*{"level_1",SearchStrategy.DFS},
+                        {"level_1",SearchStrategy.DFS},
                         {"level_2",SearchStrategy.DFS},
                         {"level_3",SearchStrategy.DFS},
                         {"gameaboutsquares_com_level_13",SearchStrategy.DFS},
@@ -100,8 +105,8 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_13",SearchStrategy.IDDFS},
                         {"gameaboutsquares_com_level_14",SearchStrategy.IDDFS},
                         {"stress_problem",SearchStrategy.IDDFS},
-                        {"stress_problem_2",SearchStrategy.IDDFS},*/
-                        {"no_solution",SearchStrategy.IDDFS}/*,
+                        {"stress_problem_2",SearchStrategy.IDDFS},
+                       // {"no_solution",SearchStrategy.IDDFS},
 
                         {"level_1",SearchStrategy.GREEDY},
                         {"level_2",SearchStrategy.GREEDY},
@@ -117,7 +122,7 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_13",SearchStrategy.ASTAR},
                         {"gameaboutsquares_com_level_14",SearchStrategy.ASTAR},
                         {"stress_problem",SearchStrategy.ASTAR},
-                        {"stress_problem_2",SearchStrategy.ASTAR},*/
+                        {"stress_problem_2",SearchStrategy.ASTAR},
                 });
     }
 }
