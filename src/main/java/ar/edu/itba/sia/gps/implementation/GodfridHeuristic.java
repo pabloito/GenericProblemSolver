@@ -12,8 +12,8 @@ public class GodfridHeuristic implements Heuristic {
         StateImpl st = (StateImpl) state;
         int x, y;
         for (Square square:st.getSquares()){
-            x = Math.abs(square.getObjective().getX() - square.getX());
-            y = Math.abs(square.getObjective().getY() - square.getY());
+            x = square.getObjective().getX() - square.getX();
+            y = square.getObjective().getY() - square.getY();
 
             if(x<0)
                 max_left = max_left > x*-1 ? max_left : x;
