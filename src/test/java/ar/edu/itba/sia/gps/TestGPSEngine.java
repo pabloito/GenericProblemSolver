@@ -50,7 +50,7 @@ public class TestGPSEngine {
             MetricComparer.getInstance().addDepth(searchStrategy,level_name,gpsEngine.getSolutionNode().getDepth());
             MetricComparer.getInstance().addResult(searchStrategy,level_name,false);
             MetricComparer.getInstance().addExpandedNodes(searchStrategy,level_name,gpsEngine.getExplosionCounter());
-            MetricComparer.getInstance().addFrontierNodes(searchStrategy,level_name,gpsEngine.getFrontierNodes());
+            MetricComparer.getInstance().addFrontierNodes(searchStrategy,level_name,gpsEngine.getOpen().size());
             MetricComparer.getInstance().addAnalyzedNodes(searchStrategy,level_name,gpsEngine.getBestCosts().size());
 
         }

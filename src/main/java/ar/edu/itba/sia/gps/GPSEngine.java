@@ -12,7 +12,7 @@ import static ar.edu.itba.sia.gps.SearchStrategy.IDDFS;
 public class GPSEngine {
 
 	private Queue<GPSNode> open;
-	private List<GPSNode> iddfsFrontier;
+    private long iddfsNodesViewedPrev;
 	private Map<State, CostAndDepth> bestCosts;
 	private Problem problem;
 	private long explosionCounter;
@@ -45,7 +45,7 @@ public class GPSEngine {
 		}
 
 		bestCosts = new HashMap<>();
-		iddfsFrontier = new ArrayList<>();
+		iddfsNodesViewedPrev = 0;
 		this.problem = problem;
 		this.strategy = strategy;
 		this.heuristic = heuristic;
@@ -98,10 +98,10 @@ public class GPSEngine {
 	}
 
 	private void Initialize_IDDFS(GPSNode initNode) {
+        iddfsNodesViewedPrev = bestCosts.size();
 		bestCosts.clear();
 		open.clear();
 		open.add(initNode);
-		iddfsFrontier.clear();
 	}
 
 
@@ -119,17 +119,11 @@ public class GPSEngine {
 				explode(currentNode);
 			}
 		}
-		return new IDDFSPackage(null,hasRemainingNodes());
+		return new IDDFSPackage(null,hasRemainingNodes()|| depth==0);
 	}
 
 	private boolean hasRemainingNodes() {
-		System.out.println("Frontier Size: '"+ iddfsFrontier.size()+"'");
-		for (GPSNode node : iddfsFrontier) {
-			if(!bestCosts.containsKey(node.getState())){
-				return true;
-			}
-		}
-		return false;
+		return bestCosts.size()!=iddfsNodesViewedPrev;
 	}
 
 	private void explode(GPSNode node){
@@ -150,7 +144,6 @@ public class GPSEngine {
 					return;
 				}
 				if(node.getDepth()==depth){
-					iddfsFrontier.addAll(addCandidates(node));
 					return;
 				}
 			case ASTAR:
@@ -256,13 +249,5 @@ public class GPSEngine {
 			this.node=node;
 			this.remaindingNodes=remaindingNodes;
 		}
-	}
-
-	public List<GPSNode> getIddfsFrontier() {
-		return iddfsFrontier;
-	}
-
-	public int getFrontierNodes(){
-		return open.size()+ iddfsFrontier.size();
 	}
 }
