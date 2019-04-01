@@ -82,7 +82,7 @@ public class GPSEngine {
 	private void findSolution_IDDFS(GPSNode initNode) {
 		IDDFSPackage pack = new IDDFSPackage(null,true);
 		int depth =0;
-		while(pack.remaindingNodes)
+		while(pack.remainingNodes)
 		{
 			Initialize_IDDFS(initNode);
 			pack= depthLimitedDFS(depth);
