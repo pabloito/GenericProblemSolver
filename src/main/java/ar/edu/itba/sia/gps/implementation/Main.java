@@ -103,7 +103,7 @@ public class Main {
         switch(searchStrategy.name()){
             case "GREEDY":
             case "ASTAR":
-                System.out.println("Heuristic: " + heuristicImpl+"\n");
+                System.out.println("Heuristic: " + heuristicImpl +"\n");
                 break;
             default:
                 break;
@@ -119,7 +119,7 @@ public class Main {
             ColorsService.colorPrint("green","Succeeded");
             System.out.println("");
             System.out.println("");
-            System.out.println("Step by step solution: ");
+            System.out.println("Step by step solution: \n");
             System.out.println(engine.getSolutionNode().getSolution());
             System.out.println("--------------------------");
             System.out.println("Solution depth: "+engine.getSolutionNode().getDepth()+"\n");

@@ -34,13 +34,13 @@ public class GPSEngine {
 				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth).reversed());
 				break;
 			case ASTAR:
-				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n)-> (n.getCost()+heuristic.getValue(n.getState()))));
+				open = new PriorityQueue<>(Comparator.comparingDouble((GPSNode n)-> (n.getCost()+heuristic.getValue(n.getState())+Math.random())));
 				break;
 			case IDDFS:
 				open = new PriorityQueue<>(Comparator.comparingInt(GPSNode::getDepth).reversed());
 				break;
 			case GREEDY:
-				open = new PriorityQueue<>(Comparator.comparingInt((GPSNode n) -> heuristic.getValue(n.getState())));
+				open = new PriorityQueue<>(Comparator.comparingDouble((GPSNode n) -> (heuristic.getValue(n.getState())+Math.random())));
 				break;
 		}
 
@@ -241,13 +241,13 @@ public class GPSEngine {
 
 	private class IDDFSPackage
 	{
-		private boolean remaindingNodes;
+		private boolean remainingNodes;
 		private GPSNode node;
 
-		public IDDFSPackage(GPSNode node, boolean remaindingNodes)
+		public IDDFSPackage(GPSNode node, boolean remainingNodes)
 		{
-			this.node=node;
-			this.remaindingNodes=remaindingNodes;
+			this.node = node;
+			this.remainingNodes = remainingNodes;
 		}
 	}
 }
