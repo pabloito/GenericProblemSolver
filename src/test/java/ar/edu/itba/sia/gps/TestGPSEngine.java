@@ -27,7 +27,7 @@ public class TestGPSEngine {
 
     @Before
     public void setup(){
-        Heuristic heuristic = new GodfridHeuristic();
+        Heuristic heuristic = new AverageDistanceHeuristic();
         gpsEngine = new GPSEngine(new ProblemImpl(ProblemImpl.readLevel("./src/main/java/ar/edu/itba/sia/gps/problems/"+level_name+".json")),searchStrategy, heuristic);
     }
 
@@ -48,7 +48,7 @@ public class TestGPSEngine {
             MetricComparer.getInstance().addTime(searchStrategy, level_name, nanos);
             MetricComparer.getInstance().addCost(searchStrategy,level_name,gpsEngine.getSolutionNode().getCost());
             MetricComparer.getInstance().addDepth(searchStrategy,level_name,gpsEngine.getSolutionNode().getDepth());
-            MetricComparer.getInstance().addResult(searchStrategy,level_name,false);
+            MetricComparer.getInstance().addResult(searchStrategy,level_name,!gpsEngine.isFailed());
             MetricComparer.getInstance().addExpandedNodes(searchStrategy,level_name,gpsEngine.getExplosionCounter());
             MetricComparer.getInstance().addFrontierNodes(searchStrategy,level_name,gpsEngine.getOpen().size());
             MetricComparer.getInstance().addAnalyzedNodes(searchStrategy,level_name,gpsEngine.getBestCosts().size());
