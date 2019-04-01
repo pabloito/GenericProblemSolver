@@ -19,4 +19,9 @@ public class MaxPathHeuristic implements Heuristic {
 
         return remainingDistance;
     }
+
+    @Override
+    public String toString() {
+        return "Maximum Path Heuristic";
+    }
 }

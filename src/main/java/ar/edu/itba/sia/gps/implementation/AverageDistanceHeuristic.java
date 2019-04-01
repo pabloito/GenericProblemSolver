@@ -16,4 +16,9 @@ public class AverageDistanceHeuristic implements Heuristic {
 
         return distance/st.getSquares().size();
     }
+
+    @Override
+    public String toString() {
+        return "Average Distance Heuristic";
+    }
 }

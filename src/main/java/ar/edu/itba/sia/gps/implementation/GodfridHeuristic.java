@@ -29,4 +29,9 @@ public class GodfridHeuristic implements Heuristic {
 
         return max_up + max_down + max_left + max_right;
     }
+
+    @Override
+    public String toString() {
+        return "Godfrid Heuristic";
+    }
 }

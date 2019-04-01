@@ -4,6 +4,7 @@ import ar.edu.itba.sia.gps.GPSEngine;
 import ar.edu.itba.sia.gps.SearchStrategy;
 import ar.edu.itba.sia.gps.api.Heuristic;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -90,12 +91,46 @@ public class Main {
         }
 
         GPSEngine engine = new GPSEngine(new ProblemImpl(ProblemImpl.readLevel(filename)), searchStrategy, heuristicImpl);
+
+        long time_before = System.currentTimeMillis();
         engine.findSolution();
-        System.out.println("Search strategy: " + searchStrategy.name());
-        System.out.println("Search " + (engine.isFailed()? "failed" : "succeeded"));
+        long time_after = System.currentTimeMillis();
+        long computational_time = time_after-time_before;
+
         System.out.println("");
-        System.out.println(engine.getSolutionNode().getSolution());
-        // TODO: imprimir cosas que pide el enunciado
+        System.out.println("Search strategy: " + searchStrategy.name()+"\n");
+
+        switch(searchStrategy.name()){
+            case "GREEDY":
+            case "ASTAR":
+                System.out.println("Heuristic: " + heuristicImpl+"\n");
+                break;
+            default:
+                break;
+        }
+
+        System.out.printf("Status: ");
+        if(engine.isFailed()){
+            ColorsService.colorPrint("red","Failed");
+            System.out.println("");
+            System.out.println("");
+        }
+        else {
+            ColorsService.colorPrint("green","Succeeded");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("Step by step solution: ");
+            System.out.println(engine.getSolutionNode().getSolution());
+            System.out.println("--------------------------");
+            System.out.println("Solution depth: "+engine.getSolutionNode().getDepth()+"\n");
+            System.out.println("Solution cost: "+engine.getSolutionNode().getCost()+"\n");
+        }
+
+        System.out.println("Expanded nodes: "+engine.getExplosionCounter()+"\n");
+        System.out.println("States analyzed: "+engine.getBestCosts().size()+"\n");
+        System.out.println("Frontier nodes: "+engine.getOpen().size()+"\n");
+        System.out.println("Computation time: "+computational_time+" ms");
+        System.out.println("--------------------------");
 
     }
 
