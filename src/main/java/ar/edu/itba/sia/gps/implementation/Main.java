@@ -114,6 +114,8 @@ public class Main {
             ColorsService.colorPrint("red","Failed");
             System.out.println("");
             System.out.println("");
+            System.out.println("Initial state: \n");
+            System.out.println(engine.getProblem().getInitState().getRepresentation());
         }
         else {
             ColorsService.colorPrint("green","Succeeded");
