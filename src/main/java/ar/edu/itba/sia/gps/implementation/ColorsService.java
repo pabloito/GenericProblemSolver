@@ -38,6 +38,12 @@ public class ColorsService {
                 return ANSI_GREEN;
             case "purple":
                 return ANSI_PURPLE;
+            case "cyan":
+                return ANSI_CYAN;
+            case "yellow":
+                return ANSI_YELLOW;
+            case "black":
+                return ANSI_BLACK;
         }
         return ANSI_WHITE;
     }
