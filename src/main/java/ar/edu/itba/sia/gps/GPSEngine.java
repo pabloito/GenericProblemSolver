@@ -106,7 +106,6 @@ public class GPSEngine {
 
 
 	private IDDFSPackage depthLimitedDFS(int depth)	{
-		System.out.println("Running DFS for depth: '"+depth+"'");
 		while (open.size() > 0) {
 			GPSNode currentNode = open.remove();
 			if(currentNode.getDepth()==depth){
