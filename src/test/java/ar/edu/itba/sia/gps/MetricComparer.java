@@ -89,10 +89,10 @@ class MetricComparer {
 
     private <T> void printTable(Map<String, Map<SearchStrategy,T>> map, String tableName) {
         printHeader(tableName);
-        final Object[][] table = new String[7][];
+        final Object[][] table = new String[8][];
         int row_number=0;
         for (Map.Entry<String,Map<SearchStrategy,T>> entry : map.entrySet()) {
-            table[row_number] = new String[6];
+            table[row_number] = new String[7];
             table[row_number][0]=entry.getKey();
             for(Map.Entry<SearchStrategy,T> innerEntry: entry.getValue().entrySet())
             {

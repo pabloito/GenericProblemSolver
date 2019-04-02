@@ -90,6 +90,7 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_14",SearchStrategy.DFS},
                         {"stress_problem",SearchStrategy.DFS},
                         {"stress_problem_2",SearchStrategy.DFS},
+                        {"dfs_worst_case",SearchStrategy.DFS},
 
                         {"level_1",SearchStrategy.BFS},
                         {"level_2",SearchStrategy.BFS},
@@ -98,6 +99,7 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_14",SearchStrategy.BFS},
                         {"stress_problem",SearchStrategy.BFS},
                         {"stress_problem_2",SearchStrategy.BFS},
+                        {"dfs_worst_case",SearchStrategy.BFS},
 
                         {"level_1",SearchStrategy.IDDFS},
                         {"level_2",SearchStrategy.IDDFS},
@@ -106,7 +108,7 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_14",SearchStrategy.IDDFS},
                         {"stress_problem",SearchStrategy.IDDFS},
                         {"stress_problem_2",SearchStrategy.IDDFS},
-                       // {"no_solution",SearchStrategy.IDDFS},
+                        {"dfs_worst_case",SearchStrategy.IDDFS},
 
                         {"level_1",SearchStrategy.GREEDY},
                         {"level_2",SearchStrategy.GREEDY},
@@ -115,6 +117,7 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_14",SearchStrategy.GREEDY},
                         {"stress_problem",SearchStrategy.GREEDY},
                         {"stress_problem_2",SearchStrategy.GREEDY},
+                        {"dfs_worst_case",SearchStrategy.GREEDY},
 
                         {"level_1",SearchStrategy.ASTAR},
                         {"level_2",SearchStrategy.ASTAR},
@@ -123,6 +126,7 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_14",SearchStrategy.ASTAR},
                         {"stress_problem",SearchStrategy.ASTAR},
                         {"stress_problem_2",SearchStrategy.ASTAR},
+                        {"dfs_worst_case",SearchStrategy.ASTAR},
                 });
     }
 }
