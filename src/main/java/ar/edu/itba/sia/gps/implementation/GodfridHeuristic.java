@@ -16,12 +16,12 @@ public class GodfridHeuristic implements Heuristic {
             y = square.getObjective().getY() - square.getY();
 
             if(x<0)
-                max_left = max_left > x*-1 ? max_left : x;
+                max_left = max_left > x*-1 ? max_left : -x;
             else
                 max_right = max_right > x ? max_right : x;
 
             if(y<0)
-                max_down = max_down > y*-1 ? max_down : y;
+                max_down = max_down > y*-1 ? max_down : -y;
             else
                 max_up = max_up > y ? max_up : y;
 
