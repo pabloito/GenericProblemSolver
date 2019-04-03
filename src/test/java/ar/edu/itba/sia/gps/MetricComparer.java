@@ -11,7 +11,7 @@ class MetricComparer {
     private Map<String,Map<SearchStrategy,Boolean>> success;
     private Map<String,Map<SearchStrategy,Integer>> depths;
     private Map<String,Map<SearchStrategy,Long>> expandedNodes;
-    private Map<String,Map<SearchStrategy,Integer>> analyzedNodes;
+    private Map<String,Map<SearchStrategy,Long>> analyzedNodes;
     private Map<String,Map<SearchStrategy,Integer>> frontierNodes;
     private Map<String,Map<SearchStrategy,Integer>> solutionCosts;
 
@@ -48,7 +48,7 @@ class MetricComparer {
         addMetric(searchStrategy,problemTested,expandedNodes,this.expandedNodes);
     }
 
-    void addAnalyzedNodes(SearchStrategy searchStrategy, String problemTested, int analyzedNodes) {
+    void addAnalyzedNodes(SearchStrategy searchStrategy, String problemTested, long analyzedNodes) {
         addMetric(searchStrategy,problemTested,analyzedNodes,this.analyzedNodes);
     }
 

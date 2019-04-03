@@ -20,6 +20,7 @@ public class GPSEngine {
 	private boolean failed;
 	private GPSNode solutionNode;
 	private Heuristic heuristic;
+	private long analyzedCounter;
 
 	// Use this variable in open set order.
 	private  SearchStrategy strategy;
@@ -50,6 +51,7 @@ public class GPSEngine {
 		this.strategy = strategy;
 		this.heuristic = heuristic;
 		explosionCounter = 0;
+		analyzedCounter = 0;
 		finished = false;
 		failed = false;
 	}
@@ -67,6 +69,7 @@ public class GPSEngine {
 	{
 		while (open.size() > 0) {
 			GPSNode currentNode = open.remove();
+			analyzedCounter++;
 			if (problem.isGoal(currentNode.getState())) {
 				finished = true;
 				solutionNode = currentNode;
@@ -112,6 +115,7 @@ public class GPSEngine {
 				if (problem.isGoal(currentNode.getState())) {
 					return new IDDFSPackage(currentNode,true);
 				}
+				analyzedCounter++;
 				explode(currentNode,depth);
 			}
 			else{
@@ -248,5 +252,9 @@ public class GPSEngine {
 			this.node = node;
 			this.remainingNodes = remainingNodes;
 		}
+	}
+
+	public long getAnalyzedCounter() {
+		return analyzedCounter;
 	}
 }

@@ -51,7 +51,7 @@ public class TestGPSEngine {
             MetricComparer.getInstance().addResult(searchStrategy,level_name,b);
             MetricComparer.getInstance().addExpandedNodes(searchStrategy,level_name,gpsEngine.getExplosionCounter());
             MetricComparer.getInstance().addFrontierNodes(searchStrategy,level_name,gpsEngine.getOpen().size());
-            MetricComparer.getInstance().addAnalyzedNodes(searchStrategy,level_name,gpsEngine.getBestCosts().size());
+            MetricComparer.getInstance().addAnalyzedNodes(searchStrategy,level_name,gpsEngine.getAnalyzedCounter());
 
         }
 
@@ -90,7 +90,7 @@ public class TestGPSEngine {
                         {"gameaboutsquares_com_level_14",SearchStrategy.DFS},
                         {"stress_problem",SearchStrategy.DFS},
                         {"stress_problem_2",SearchStrategy.DFS},
-                        {"dfs_worst_case",SearchStrategy.DFS},
+                      //  {"dfs_worst_case",SearchStrategy.DFS},
 
                         {"level_1",SearchStrategy.BFS},
                         {"level_2",SearchStrategy.BFS},
