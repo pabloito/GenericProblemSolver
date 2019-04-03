@@ -1,0 +1,16 @@
+Para compilar.
+
+1. Pararse sobre el directorio principal del repositorio
+2. Ejecutar la linea 'mvn package' (En una computadora del equipo la ejecución de las pruebas tomó 2 minutos).
+
+Un ejemplo de ejecución.
+
+1. Pararse sobre el directorio /target
+2. Ejecutar la linea 'java -jar gps-1.0.jar -p ../src/main/java/ar/edu/itba/sia/gps/problems/level_1.json -s GREEDY -h GOD'
+
+Otro ejemplo de ejecución.
+
+1. Pararse sobre el directorio -target
+2. Ejecutar la linea 'java -jar gps-1.0.jar -p ../src/main/java/ar/edu/itba/sia/gps/problems/level_2.json -s ASTAR -h AVG'
+
+Por documentación detallada dirigirse a la sección 'Método de Input' del Informe.
