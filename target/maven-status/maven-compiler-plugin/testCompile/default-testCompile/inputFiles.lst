@@ -1,0 +1,14 @@
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/rules/E8MoveLeftRule.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/E8State.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/MyTime.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/TestRuleImpl.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/rules/E8MoveDownRule.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/E8Problem.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/E8HeuristicB.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/rules/E8MoveUpRule.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/MetricComparer.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/Pair.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/TestGPSEngine.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/E8HeuristicA.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/rules/E8MoveRightRule.java
+/home/pablo/SIA/sia-2019-1c-09/src/test/java/ar/edu/itba/sia/gps/eightpuzzle/rules/E8MoveRule.java
